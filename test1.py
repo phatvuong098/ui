@@ -16,7 +16,7 @@ isO3O = False
 isO2O = False
 isBTO = False
 isBNO = False
-isSKO = False
+isPW = False
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -38,8 +38,8 @@ class Ui_MainWindow(object):
         self.btnUV.setText("")
         self.btnUV.setObjectName("pushButton_3")
         self.btnPW = QtWidgets.QPushButton(self.centralwidget)
-        self.btnPW.setGeometry(QtCore.QRect(680, 80, 231, 231))
-        self.btnPW.setStyleSheet("background-image: url(offpw.png);")
+        self.btnPW.setGeometry(QtCore.QRect(680, 80, 235, 235))
+        self.btnPW.setStyleSheet("background-image: url(offpw.png);\n""background-color: transparent;")
         self.btnPW.setText("")
         self.btnPW.setObjectName("pushButton_9")
         self.btnModeB = QtWidgets.QPushButton(self.centralwidget)
@@ -88,6 +88,7 @@ class Ui_MainWindow(object):
         self.btnBN.clicked.connect(self.BN)
         self.btnBT.clicked.connect(self.BT)
         self.btnO2.clicked.connect(self.O2)
+        self.btnPW.clicked.connect(self.PW)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -102,18 +103,18 @@ class Ui_MainWindow(object):
     def ModeA(self):
         global isModeA
         if isModeA:
-            self.btnModeA.setStyleSheet("background-image: url(offmode.png);")
+            self.btnModeA.setStyleSheet("background-image: url(offmode.png);\n""background-color: transparent;")
             isModeA = False
         else:
-            self.btnModeA.setStyleSheet("background-image: url(onmode.png);")
+            self.btnModeA.setStyleSheet("background-image: url(onmode.png);\n""background-color: transparent;")
             isModeA = True
     def ModeB(self):
         global isModeB
         if isModeB:
-            self.btnModeB.setStyleSheet("background-image: url(offmode.png);")
+            self.btnModeB.setStyleSheet("background-image: url(offmode.png);\n""background-color: transparent;")
             isModeB = False
         else:
-            self.btnModeB.setStyleSheet("background-image: url(onmode.png);")
+            self.btnModeB.setStyleSheet("background-image: url(onmode.png);\n""background-color: transparent;")
             isModeB = True
     def UV(self):
         global isUVO
@@ -155,6 +156,14 @@ class Ui_MainWindow(object):
         else:
             self.btnO2.setStyleSheet("background-image: url(o2on.png);")
             isO2O = True
+    def PW(self):
+        global isPW
+        if isPW:
+            self.btnPW.setStyleSheet("background-image: url(offpw.png);\n""background-color: transparent;")
+            isPW = False
+        else:
+            self.btnPW.setStyleSheet("background-image: url(onpw.png);\n""background-color: transparent;")
+            isPW = True
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
