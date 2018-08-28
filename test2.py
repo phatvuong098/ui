@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'test1.ui'
 #
-# Created: Tue Aug 28 15:49:39 2018
+# Created: Tue Aug 28 17:21:37 2018
 #      by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(70, 120, 140, 131))
-        self.pushButton.setStyleSheet("background-image: url(:/newPrefix/hoachaton.png);")
+        self.pushButton.setStyleSheet("background-image: url(:/newPrefix/hoachaton.png);\n"
+"background-color: transparent;")
         self.pushButton.setText("")
         self.pushButton.setObjectName("pushButton")
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
