@@ -82,27 +82,18 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.btnHC.clicked.connect(self.hc)
         self.btnModeA.clicked.connect(self.ModeA)
         self.btnModeB.clicked.connect(self.ModeB)
-        self.btnUV.clicked.connect(self.UV)
-        self.btnO3.clicked.connect(self.O3)
-        self.btnBN.clicked.connect(self.BN)
-        self.btnBT.clicked.connect(self.BT)
-        self.btnO2.clicked.connect(self.O2)
         self.btnPW.clicked.connect(self.PW)
         self.loop()
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def hc(self):
-        global isHCO
         if isHCO:
             self.btnHC.setStyleSheet("background-image: url(hoachatoff.png);")
-            isHCO = False
         else:
             self.btnHC.setStyleSheet("background-image: url(hoachaton.png);")
-            isHCO = True
     def ModeA(self):
         global isModeA
         if isModeA:
@@ -120,59 +111,50 @@ class Ui_MainWindow(object):
             self.btnModeB.setStyleSheet("background-image: url(onmode.png);\n""background-color: transparent;")
             isModeB = True
     def UV(self):
-        global isUVO
         if isUVO:
             self.btnUV.setStyleSheet("background-image: url(uvon.png);")
-            isUVO = False
         else:
             self.btnUV.setStyleSheet("background-image: url(uvoff.png);")
-            isUVO = True
     def O3(self):
-        global isO3O
         if isO3O:
             self.btnO3.setStyleSheet("background-image: url(o3on.png);")
-            isO3O = False
         else:
             self.btnO3.setStyleSheet("background-image: url(o3off.png);")
-            isO3O = True
     def BT(self):
-        global isBTO
         if isBTO:
             self.btnBT.setStyleSheet("background-image: url(bom2off.png);")
-            isBTO = False
         else:
             self.btnBT.setStyleSheet("background-image: url(bom2on.png);")
-            isBTO = True
     def BN(self):
-        global isBNO
         if isBNO:
             self.btnBN.setStyleSheet("background-image: url(bomoff.png);")
-            isBNO = False
         else:
             self.btnBN.setStyleSheet("background-image: url(bomon.png);")
-            isBNO = True
     def O2(self):
-        global isO2O
         if isO2O:
             self.btnO2.setStyleSheet("background-image: url(o2off.png);")
-            isO2O = False
         else:
             self.btnO2.setStyleSheet("background-image: url(o2on.png);")
-            isO2O = True
     def PW(self):
-        global isPW
+		global isPW
         if isPW:
             self.btnPW.setStyleSheet("background-image: url(offpw.png);\n""background-color: transparent;")
-            isPW = False
+			isPW = False
         else:
             self.btnPW.setStyleSheet("background-image: url(onpw.png);\n""background-color: transparent;")
-            isPW = True
+			isPW = True
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
     def loop(self):
         self.PW()
+        self.O2()
+        self.O3()
+		self.BN()
+		self.BT()
+		self.hc()
         threading.Timer(1.0,self.loop).start()
+		
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
