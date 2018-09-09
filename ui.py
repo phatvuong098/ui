@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QThread
 #import RPi.GPIO as GPIO
 import threading
 isModeA = False
@@ -20,6 +21,13 @@ isBTO = False
 isBNO = False
 isPW = False
 
+class loopp(QThread):
+    def run(self):
+        while True:
+            time.sleep(1)
+            self.ui = Ui_MainWindow
+            Ui_MainWindow.loop(ui)
+			
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -39,6 +47,7 @@ class Ui_MainWindow(object):
         self.btnUV.setStyleSheet("background-image: url(uvoff.png);")
         self.btnUV.setText("")
         self.btnUV.setObjectName("pushButton_3")
+        self.btnUV.setEnabled(False)
         self.btnPW = QtWidgets.QPushButton(self.centralwidget)
         self.btnPW.setGeometry(QtCore.QRect(680, 80, 235, 235))
         self.btnPW.setStyleSheet("background-image: url(offpw.png);\n""background-color: transparent;")
@@ -54,26 +63,31 @@ class Ui_MainWindow(object):
         self.btnBT.setStyleSheet("background-image: url(bom2off.png);")
         self.btnBT.setText("")
         self.btnBT.setObjectName("pushButton_4")
+        self.btnBT.setEnabled(False)
         self.btnO3 = QtWidgets.QPushButton(self.centralwidget)
         self.btnO3.setGeometry(QtCore.QRect(360, 390, 140, 131))
         self.btnO3.setStyleSheet("background-image: url(o3off.png);")
         self.btnO3.setText("")
         self.btnO3.setObjectName("pushButton_5")
+        self.btnO3.setEnabled(False)
         self.btnHC = QtWidgets.QPushButton(self.centralwidget)
         self.btnHC.setGeometry(QtCore.QRect(520, 390, 140, 131))
         self.btnHC.setText("")
         self.btnHC.setObjectName("pushButton_6")
+        self.btnHC.setEnabled(False)
         self.btnHC.setStyleSheet("background-image: url(hoachatoff.png);")
         self.btnO2 = QtWidgets.QPushButton(self.centralwidget)
         self.btnO2.setGeometry(QtCore.QRect(680, 390, 140, 131))
         self.btnO2.setStyleSheet("background-image: url(o2off.png);")
         self.btnO2.setText("")
         self.btnO2.setObjectName("pushButton_7")
+        self.btnO2.setEnabled(False)
         self.btnBN = QtWidgets.QPushButton(self.centralwidget)
         self.btnBN.setGeometry(QtCore.QRect(840, 390, 140, 131))
         self.btnBN.setStyleSheet("background-image: url(bomoff.png);")
         self.btnBN.setText("")
         self.btnBN.setObjectName("pushButton_8")
+        self.btnBN.setEnabled(False)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1024, 21))
@@ -136,24 +150,23 @@ class Ui_MainWindow(object):
         else:
             self.btnO2.setStyleSheet("background-image: url(o2on.png);")
     def PW(self):
-		global isPW
+        global isPW
         if isPW:
             self.btnPW.setStyleSheet("background-image: url(offpw.png);\n""background-color: transparent;")
-			isPW = False
+            isPW = False
         else:
             self.btnPW.setStyleSheet("background-image: url(onpw.png);\n""background-color: transparent;")
-			isPW = True
+            isPW = True
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
     def loop(self):
-        self.PW()
+        self.hc()
+        self.UV()
         self.O2()
         self.O3()
-		self.BN()
-		self.BT()
-		self.hc()
-        threading.Timer(1.0,self.loop).start()
+        self.BN()
+        self.BT()
 		
 if __name__ == "__main__":
     import sys

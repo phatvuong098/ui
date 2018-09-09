@@ -8,7 +8,10 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QThread
+import time
 #import RPi.GPIO as GPIO
+import sys
 import threading
 isModeA = False
 isModeB = False
@@ -20,6 +23,13 @@ isBTO = False
 isBNO = False
 isPW = False
 
+class loopp(QThread):
+    def run(self):
+        while True:
+            time.sleep(1)
+            self.ui = Ui_MainWindow
+            Ui_MainWindow.loop(ui)
+			
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -92,6 +102,8 @@ class Ui_MainWindow(object):
         self.btnO2.clicked.connect(self.O2)
         self.btnPW.clicked.connect(self.PW)
         self.loop()
+        self.loopp = loopp()
+        self.loopp.start()
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -171,8 +183,12 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
     def loop(self):
-        self.PW()
-        threading.Timer(1.0,self.loop).start()
+        self.hc()
+        self.UV()
+        self.O2()
+        self.O3()
+        self.BN()
+        self.BT()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
